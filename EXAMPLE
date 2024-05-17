@@ -1,0 +1,71 @@
+POKEMON API ROUTES
+
+INDEPENDIENTES: 
+  - teams x
+  - pokemon_templates x
+  - moves x
+
+DEPENDIENTES:
+  - pokemon de teams x
+  - moves de pokemon_templates x
+
+
+Pokemons
+
+PokemonTemplates::MovesController
+/pokemon_templates/:pokemon_templates_id/moves
+
+ [/pokemon_templates/:pokemon_templates_id/moves]  index (filters)   GET
+ [/pokemon_templates/:pokemon_templates_id/moves/:id]  show   GET
+ [/pokemon_templates/:pokemon_templates_id/moves]  create   POST
+ [/pokemon_templates/:pokemon_templates_id/moves/:id]  update   PUT/PATCH
+ [/pokemon_templates/:pokemon_templates_id/moves/:id]  destroy   DELETE
+
+Moves::PokemonTemplatesController
+/moves/:moves_id/pokemon_templates
+
+ [/moves/:moves_id/pokemon_templates]  index (filters)   GET
+ [/moves/:moves_id/pokemon_templates/:id]  show   GET
+ [/moves/:moves_id/pokemon_templates]  create   POST
+ [/moves/:moves_id/pokemon_templates/:id]  update   PUT/PATCH
+ [/moves/:moves_id/pokemon_templates/:id]  destroy   DELETE
+
+Teams::PokemonsController
+/teams/:team_id/pokemons 
+
+ [/teams/:team_id/pokemons]  index (filters)   GET
+ [/teams/:team_id/pokemons/:id]  show   GET
+ [/teams/:team_id/pokemons]  create   POST
+ [/teams/:team_id/pokemons/:id]  update   PUT/PATCH
+ [/teams/:team_id/pokemons/:id]  destroy   DELETE
+
+PokemonTemplatesController
+/pokemon_templates 
+
+ [/pokemon_templates]  index (filters)  GET
+ [/pokemon_templates/:id]  show   GET
+ [/pokemon_templates]  create   POST
+ [/pokemon_templates/:id]  update   PUT/PATCH
+ [/pokemon_templates/:id]  destroy   DELETE
+
+TeamsController
+/teams 
+
+ [/teams]  index (filters)  GET
+ [/teams/:id]  show   GET
+ [/teams]  create   POST
+ [/teams/:id]  update   PUT/PATCH
+ [/teams/:id]  destroy   DELETE
+
+MovesController
+/moves 
+
+ [/moves]  index (filters)  GET
+ [/moves/:id]  show   GET
+ [/moves]  create   POST
+ [/moves/:id]  update   PUT/PATCH
+ [/moves/:id]  destroy   DELETE
+
+
+
+

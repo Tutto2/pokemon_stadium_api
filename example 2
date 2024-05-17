@@ -1,0 +1,34 @@
+require 'rest-client'
+require 'json'
+require 'csv'
+
+# Función para obtener los datos de un Pokémon por su nombre
+def fetch_pokemon_data(url, file)
+  pokemons_list = RestClient.get(url)
+  pokemons_list = JSON.parse(pokemons_list)
+
+  pokemons_list['results'].each do |pokemon|
+    data = RestClient.get(pokemon['url'])
+    data = JSON.parse(data)
+    types = data['types'].map { |t| t['type']['name'] }.join(' / ')
+    stats = data['stats'].map { |s| s['base_stat'] }
+    file.puts data["name"]
+    file.puts "Types: #{types}"
+    file.puts "Stats:"
+    file.puts "hp: #{stats[0]}"
+    file.puts "atk: #{stats[1]}"
+    file.puts "def: #{stats[2]}"
+    file.puts "sp_atk: #{stats[3]}"
+    file.puts "sp_def: #{stats[4]}"
+    file.puts "spd: #{stats[5]}"
+  end
+
+  return if pokemons_list['next'].nil?
+
+  fetch_pokemon_data(pokemons_list['next'], file)
+end
+
+# Archivo CSV donde guardar los datos
+File.open("pokemonlist.dat", "wb") do |file|
+  fetch_pokemon_data("https://pokeapi.co/api/v2/pokemon", file)
+end

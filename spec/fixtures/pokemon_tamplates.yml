@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  types: MyString
+  hp: 1
+  atk: 1
+  def: 1
+  sp_atk: 1
+  sp_def: 1
+  spd: 1
+
+two:
+  name: MyString
+  types: MyString
+  hp: 1
+  atk: 1
+  def: 1
+  sp_atk: 1
+  sp_def: 1
+  spd: 1
