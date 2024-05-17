@@ -20,4 +20,5 @@ class PokemonTemplate < ApplicationRecord
   has_many :pokemons
 
   validates :name, uniqueness: true
+  validates :name, :types, :hp, :atk, :def, :sp_atk, :sp_def, :spd, presence: true
 end

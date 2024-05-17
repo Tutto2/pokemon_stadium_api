@@ -12,16 +12,16 @@ class PokemonTemplatesController < ApplicationController
 
     render json: PokemonTemplateBlueprint.render(pokemon_template, view: :complete), status: :created
   end
-  
+
   def update
     pokemon_template.update(pokemon_template_params)
 
     render json: PokemonTemplateBlueprint.render(pokemon_template, view: :complete)
   end
-  
+
   def destroy
     pokemon_template.destroy
-    
+
     render json: PokemonTemplateBlueprint.render(PokemonTemplate.all, view: :simple)
   end
 
