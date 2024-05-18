@@ -1,7 +1,7 @@
 class TeamsController < ApplicationController
 
   def index
-    teams = Team.joins(pokemons: [:pokemon_template]).all
+    teams = Team.all
     teams = teams.search_by(team_filter_params) if team_filter_params.present?
     teams = teams.search_pokemon_by(pokemon_filter_param) unless pokemon_filter_param&.empty?
     
@@ -14,7 +14,8 @@ class TeamsController < ApplicationController
 
   def create
     team = Team.create(team_params)
-
+    create_pokemons(team) if team.save
+    
     render json: TeamBlueprint.render(team, view: :detailed), status: :created
   end
   
@@ -32,11 +33,30 @@ class TeamsController < ApplicationController
 
   private
   def team_params
-    params.require(:team).permit(:name)
+    params.require(:team).permit(:name, :pokemons)
   end
 
   def team
     @team ||= Team.find(params[:id])
+  end
+
+  def create_pokemons(team)
+    return if params[:pokemons].nil?
+
+    params[:pokemons].each do |pokemon|
+      template = PokemonTemplate.find_by(name: pokemon[:name])
+      return if template.nil?
+      
+      team.pokemons.create(
+        nickname: pokemon[:nickname],
+        gender: pokemon[:gender],
+        nature: pokemon[:nature],
+        ivs: pokemon[:ivs],
+        evs: pokemon[:evs],
+        moves: pokemon[:moves],
+        pokemon_template_id: template.id
+        )
+    end
   end
 
   def view_param
