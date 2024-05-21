@@ -44,7 +44,7 @@ class TeamsController < ApplicationController
     return if params[:pokemons].nil?
 
     params[:pokemons].each do |pokemon|
-      template = PokemonTemplate.find_by(name: pokemon[:name])
+      template = PokemonTemplate.where('LOWER(name) = ?', pokemon[:name].downcase).first
       return if template.nil?
       
       team.pokemons.create(
