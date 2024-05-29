@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-
   def index
     teams = Team.all
     teams = teams.search_by(team_filter_params) if team_filter_params.present?
@@ -45,7 +44,7 @@ class TeamsController < ApplicationController
 
     params[:pokemons].each do |pokemon|
       template = PokemonTemplate.where('LOWER(name) = ?', pokemon[:name].downcase).first
-      return if template.nil?
+      next if template.nil?
       
       team.pokemons.create(
         nickname: pokemon[:nickname],
